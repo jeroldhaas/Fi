@@ -1,5 +1,6 @@
 #if INTERACTIVE
 #r "../../packages/Eto.Forms/lib/net45/Eto.dll"
+#r "System.Runtime"
 #endif
 
 open System
