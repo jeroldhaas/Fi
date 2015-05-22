@@ -8,6 +8,8 @@ open System.IO
 open Eto.Forms
 
 
-[<EntryPoint>]
+[<EntryPoint; STAThread>]
 let main args =
+    use a = new Application()
+
     0
