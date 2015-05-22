@@ -11,10 +11,13 @@ let deployDir= "./deploy/"
 // Files
 let libInputFiles = [
     "src/Fi/input.fs";
-    "src/Fi/keys.fs"
+    "src/Fi/keys.fs";
 ]
 let libAppFiles = [
-    "src/Fi/main.fs"
+    "src/Fi/main.fs";
+]
+let projectReferences = [
+    "packages/Eto.Forms/lib/net45/Eto.dll";
 ]
 
 // Targets
@@ -31,7 +34,7 @@ Target "Libs" (fun _ ->
 
 Target "Main" (fun _ ->
     libAppFiles
-    |> Fsc (fun p -> { p with References = ["Libs"] })
+    |> Fsc (fun p -> { p with References = projectReferences })
 )
 
 

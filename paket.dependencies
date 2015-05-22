@@ -1,9 +1,7 @@
 source https://nuget.org/api/v2
 
 nuget FAKE
-nuget FsCheck
 nuget FsCheck.Xunit
-nuget XUnit
 nuget ExtCore
 
 nuget Eto.Forms
