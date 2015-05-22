@@ -7,6 +7,7 @@ open Fake.FscHelper
 let buildDir = "./build/"
 let testDir  = "./test/"
 let deployDir= "./deploy/"
+let name = "fi.exe"
 
 // Files
 let libInputFiles = [
@@ -14,10 +15,14 @@ let libInputFiles = [
     "src/Fi/keys.fs";
 ]
 let libAppFiles = [
-    "src/Fi/main.fs";
+    "src/Fi/main.fsx";
 ]
 let projectReferences = [
     "packages/Eto.Forms/lib/net45/Eto.dll";
+]
+
+let frameworkReferences = [
+    "System.Runtime"
 ]
 
 // Targets
@@ -28,19 +33,19 @@ Target "Clean" (fun _ ->
 )
 
 Target "Libs" (fun _ ->
-    libInputFiles
-    |> Fsc (fun p -> { p with FscTarget = Library })
+    libInputFiles |> Fsc (fun p -> { p with FscTarget = Library })
 )
 
 Target "Main" (fun _ ->
-    libAppFiles
-    |> Fsc (fun p -> { p with References = projectReferences })
+    projectReferences |> List.iter(CopyFile buildDir)
+
+    libAppFiles |> Fsc (fun p -> { p with References = projectReferences @ frameworkReferences; Output = buildDir @@ name })
 )
 
 
 // Dependencies
 "Clean"
-    ==> "Libs"
+    //==> "Libs"
     ==> "Main"
 
 
